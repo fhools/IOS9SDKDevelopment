@@ -8,13 +8,36 @@
 
 import UIKit
 import Social
-class ViewController: UIViewController {
 
+let defaultAvatarURL = NSURL(string: "http://abs.twimg.com/sticky/default_profile_images/default_profile_6_200x200.png")
+
+
+class ViewController: UITableViewController {
+
+    var parsedTweets : [ParsedTweet] = [
+        ParsedTweet(tweetText: "iOS 9 SDK Development now in print. Swift Programming FTW!",
+        userName: "@pragprog",
+        createdAt: "2016-05-05 8:00 PDT",
+        userAvatarURL: defaultAvatarURL),
+        
+        ParsedTweet(tweetText: "But was that really such a good idea?",
+            userName: "@redqueencoder",
+            createdAt: "2016-05-05 9:00 PDT",
+            userAvatarURL: defaultAvatarURL),
+        
+        ParsedTweet(tweetText: "Struct all the things!",
+            userName: "@invalidname",
+            createdAt: "2016-05-05 10:00 PDT",
+            userAvatarURL: defaultAvatarURL)
+    ]
     
-    @IBOutlet weak var twitterWebView: UIWebView!
+        
+    
+    //@IBOutlet weak var twitterWebView: UIWebView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        reloadTweets()
+        // reloadTweets()
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -28,11 +51,13 @@ class ViewController: UIViewController {
     }
     
     func reloadTweets() {
+        /*
         guard let url = NSURL(string: "https://twitter.com/francis_huynh")  else {
             return
         }
         let urlRequest = NSURLRequest(URL: url)
         twitterWebView.loadRequest(urlRequest)
+         */
     }
     
     @IBAction func handleTweetButtonTapped(sender: UIButton) {
@@ -43,6 +68,26 @@ class ViewController: UIViewController {
         } else {
             NSLog("Can't send tweet")
         }
+    }
+    
+    // MARK: UITableViewControllerDataSource
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+//    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return "Section \(section)"
+//    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return parsedTweets.count
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell =  tableView.dequeueReusableCellWithIdentifier("UserAndTweetCell") as UITableViewCell!
+        cell.detailTextLabel?.text = parsedTweets[indexPath.row].tweetText
+        cell.textLabel?.text = parsedTweets[indexPath.row].userName
+        return cell
     }
 }
 

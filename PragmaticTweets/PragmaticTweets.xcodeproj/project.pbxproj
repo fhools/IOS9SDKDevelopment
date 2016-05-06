@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4E530ED21CD85A0F0037D4B4 /* WebViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E530ED11CD85A0F0037D4B4 /* WebViewTest.swift */; };
+		4E530ED41CDC46380037D4B4 /* ParsedTweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E530ED31CDC46370037D4B4 /* ParsedTweet.swift */; };
 		4EA640641CD5290200BF0467 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA640631CD5290200BF0467 /* AppDelegate.swift */; };
 		4EA640661CD5290200BF0467 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA640651CD5290200BF0467 /* ViewController.swift */; };
 		4EA640691CD5290200BF0467 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EA640671CD5290200BF0467 /* Main.storyboard */; };
@@ -35,7 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4E530ED11CD85A0F0037D4B4 /* WebViewTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebViewTest.swift; path = PragmaticTweetsTests/WebViewTest.swift; sourceTree = SOURCE_ROOT; };
+		4E530ED31CDC46370037D4B4 /* ParsedTweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ParsedTweet.swift; path = ../ParsedTweet.swift; sourceTree = "<group>"; };
 		4EA640601CD5290200BF0467 /* PragmaticTweets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PragmaticTweets.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EA640631CD5290200BF0467 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4EA640651CD5290200BF0467 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -99,6 +99,7 @@
 		4EA640621CD5290200BF0467 /* PragmaticTweets */ = {
 			isa = PBXGroup;
 			children = (
+				4E530ED31CDC46370037D4B4 /* ParsedTweet.swift */,
 				4EA640631CD5290200BF0467 /* AppDelegate.swift */,
 				4EA640651CD5290200BF0467 /* ViewController.swift */,
 				4EA640671CD5290200BF0467 /* Main.storyboard */,
@@ -113,7 +114,6 @@
 			isa = PBXGroup;
 			children = (
 				4EA640781CD5290200BF0467 /* PragmaticTweetsTests.swift */,
-				4E530ED11CD85A0F0037D4B4 /* WebViewTest.swift */,
 				4EA6407A1CD5290200BF0467 /* Info.plist */,
 			);
 			path = PragmaticTweetsTests;
@@ -261,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EA640661CD5290200BF0467 /* ViewController.swift in Sources */,
+				4E530ED41CDC46380037D4B4 /* ParsedTweet.swift in Sources */,
 				4EA640641CD5290200BF0467 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,7 +271,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EA640791CD5290200BF0467 /* PragmaticTweetsTests.swift in Sources */,
-				4E530ED21CD85A0F0037D4B4 /* WebViewTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
