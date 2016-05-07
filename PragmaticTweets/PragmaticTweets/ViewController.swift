@@ -84,9 +84,14 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell =  tableView.dequeueReusableCellWithIdentifier("UserAndTweetCell") as UITableViewCell!
-        cell.detailTextLabel?.text = parsedTweets[indexPath.row].tweetText
-        cell.textLabel?.text = parsedTweets[indexPath.row].userName
+        let cell =  tableView.dequeueReusableCellWithIdentifier("CustomTweetCell") as! ParsedTweetCell
+        let parsedTweet = parsedTweets[indexPath.row]
+        cell.tweetTextLabel?.text = parsedTweet.tweetText
+        cell.userNameLabel.text = parsedTweet.userName
+        cell.createdAtLabel?.text = parsedTweet.createdAt
+        if let url = parsedTweet.userAvatarURL, imageData = NSData(contentsOfURL: url) {
+            cell.avatarImageView.image = UIImage(data: imageData)
+        }
         return cell
     }
 }
