@@ -37,7 +37,10 @@ class ViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // reloadTweets()
+        reloadTweets()
+        let refresher = UIRefreshControl()
+        refresher.addTarget(self, action: #selector(ViewController.handleRefresh(_:)), forControlEvents: .ValueChanged)
+        refreshControl = refresher
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -50,14 +53,23 @@ class ViewController: UITableViewController {
         reloadTweets()
     }
     
+    @IBAction func handleRefresh(sender: AnyObject) {
+        NSLog("handleRefresh")
+        parsedTweets.append(
+            ParsedTweet(tweetText: "New row", userName: "@refresh", createdAt: NSDate().description, userAvatarURL:   defaultAvatarURL))
+        reloadTweets()
+        refreshControl?.endRefreshing()
+        
+    }
     func reloadTweets() {
-        /*
-        guard let url = NSURL(string: "https://twitter.com/francis_huynh")  else {
-            return
-        }
-        let urlRequest = NSURLRequest(URL: url)
-        twitterWebView.loadRequest(urlRequest)
-         */
+        
+//        guard let url = NSURL(string: "https://twitter.com/francis_huynh")  else {
+//            return
+//        }
+//        let urlRequest = NSURLRequest(URL: url)
+//        twitterWebView.loadRequest(urlRequest)
+        tableView.reloadData()
+        
     }
     
     @IBAction func handleTweetButtonTapped(sender: UIButton) {
