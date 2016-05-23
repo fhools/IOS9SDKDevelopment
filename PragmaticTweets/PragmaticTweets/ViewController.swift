@@ -8,7 +8,7 @@
 
 import UIKit
 import Social
-
+import Accounts
 let defaultAvatarURL = NSURL(string: "http://abs.twimg.com/sticky/default_profile_images/default_profile_6_200x200.png")
 
 
@@ -61,13 +61,47 @@ class ViewController: UITableViewController {
         refreshControl?.endRefreshing()
         
     }
+    
+    private func handleTwitterData(data: NSData!, urlResponse: NSHTTPURLResponse!, error: NSError!) {
+        guard let data = data else {
+            NSLog("handleTwitterData() received no data")
+            return
+        }
+        NSLog("handleTwitterData() got \(data.length) bytes")
+        do {
+            let jsonObject = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions([]))
+            NSLog("JSON is:\n\(jsonObject)")
+        } catch let error as NSError {
+            NSLog("JSON error: \(error)")
+        }
+    }
+    
     func reloadTweets() {
-        
-//        guard let url = NSURL(string: "https://twitter.com/francis_huynh")  else {
-//            return
-//        }
-//        let urlRequest = NSURLRequest(URL: url)
-//        twitterWebView.loadRequest(urlRequest)
+        let accountStore = ACAccountStore()
+        let twitterAccountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
+        accountStore.requestAccessToAccountsWithType(twitterAccountType, options: nil, completion: {
+            (granted: Bool, error: NSError!) -> Void in
+            guard granted else {
+                NSLog("account access not granted")
+                return
+            }
+            let twitterAccounts = accountStore.accountsWithAccountType(twitterAccountType)
+            guard twitterAccounts.count > 0  else {
+                NSLog("no twitter accounts configured")
+                return
+            }
+            
+            let twitterParams = [ "count" : "100" ]
+            let twitterAPIURL = NSURL(string: "https://api.twitter.com/1.1/statuses/home_timeline.json")
+            let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, URL: twitterAPIURL, parameters: twitterParams)
+            
+            request.account = twitterAccounts.first as! ACAccount
+            NSLog("Twitter account \(request.account.username)")
+            request.performRequestWithHandler( {
+                (data: NSData!, urlResponse: NSHTTPURLResponse!, error: NSError!) -> Void in
+                    self.handleTwitterData(data, urlResponse: urlResponse, error: error)
+            })
+        })
         tableView.reloadData()
         
     }
